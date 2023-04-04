@@ -38,8 +38,8 @@ public class App {
         while (iterator.hasNext()) {
             String next = iterator.next();
             try {
-                Object a = Integer.parseInt(next);
-                if (a instanceof Integer) iterator.remove();
+                Integer.parseInt(next);
+                iterator.remove();
             } catch (NumberFormatException e) {}
         }
         return stringsOnly;
