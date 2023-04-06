@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,9 +28,16 @@ public class App {
         Scanner sc = new Scanner(System.in);
         List<String> storage = new LinkedList<>();
         String input;
-        while (!(input = sc.nextLine()).equals("exit")) {
+        root: while (!(input = sc.nextLine()).equals("exit")) {
             String userInter = input;
-            if ("revert".equals(userInter)) Collections.reverse(storage);
+            if ("revert".equals(userInter)){
+                if (storage.size() < 1){
+                    System.out.println("It's empty");
+                    continue root;
+                }
+                storage.remove(storage.size() - 1);
+            }
+            else if ("reverse".equals(userInter)) Collections.reverse(storage);
             else if ("print".equals(userInter)) {
                 // Вывод строкой, но, вероятно, это будет ресурсозатратно, при больших объемах
                 // List<String> newStorage = new LinkedList<>(storage);
