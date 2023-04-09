@@ -27,6 +27,8 @@ public class App {
     // Если встретилась закрывающаяся скобка, то (Deque#pollFirst) и сравниваем ее с встретившейся
 
     char[] parenthesesArray = parentheses.toCharArray();
+    if (parenthesesArray.length % 2 != 0) return false;
+    
     Map<Character, Character> staplesMap = new HashMap<>();
     staplesMap.put('(', ')');
     staplesMap.put('{', '}');
@@ -34,7 +36,6 @@ public class App {
     staplesMap.put('<', '>');
 
     Deque<Character> openElement = new ArrayDeque<>();
-    if (parenthesesArray.length % 2 != 0) return false;
     
     for (int i = 0; i < parenthesesArray.length; i++) {
         if (staplesMap.containsKey(parenthesesArray[i])) {
