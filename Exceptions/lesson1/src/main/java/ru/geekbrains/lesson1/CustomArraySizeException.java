@@ -1,4 +1,4 @@
-package lesson1.src.main.java.ru.geekbrains.lesson1;
+package ru.geekbrains.lesson1;
 
 public class CustomArraySizeException extends RuntimeException {
 

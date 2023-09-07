@@ -1,4 +1,4 @@
-package lesson2.src.main.java.ru.geekbrains.lesson2;
+package ru.geekbrains.lesson2;
 
 import java.io.FileWriter;
 import java.io.IOException;
