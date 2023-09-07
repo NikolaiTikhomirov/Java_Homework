@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 import model.Gender;
 import presenter.Presenter;
+import view.exceptions.UserInterDateException;
+import view.exceptions.UserInterGenderException;
+import view.exceptions.UserInterNameException;
+import view.exceptions.UserInterPhoneException;
 
 public class Console implements View{
 
@@ -55,14 +59,50 @@ public class Console implements View{
             try {
                 System.out.println("Введите имя");
                 String name = scanner.nextLine();
-                System.out.println("Введите дату рождения в формате гггг-мм-чч");
-                LocalDate date = LocalDate.parse(scanner.nextLine());
-                System.out.println("Введите номер телефона(только цифры)");
-                Integer phone = Integer.parseInt(scanner.nextLine());
+                if (name == null || name.length() < 2)
+                    throw new UserInterNameException("Некорректное имя персоны.", name);
+                LocalDate date;
+                String dateTemp = "";
+                try {
+                    System.out.println("Введите дату рождения в формате гггг-мм-чч");
+                    dateTemp = scanner.nextLine();
+                    date = LocalDate.parse(dateTemp);
+                } catch (Exception e){
+                    throw new UserInterDateException("Неверный формат даты", dateTemp);
+                }
+                String phoneTemp = "";
+                Integer phone;
+                try {
+                    System.out.println("Введите номер телефона(только цифры)");
+                    phoneTemp = scanner.nextLine();
+                    phone = Integer.parseInt(phoneTemp);
+                } catch (Exception e){
+                    throw new UserInterPhoneException("Неверный формат номера телефона", phoneTemp);
+                }
                 System.out.println("Укажите пол (f or m)");
-                Gender gender = Gender.valueOf(scanner.nextLine());
+                String genderTemp = scanner.nextLine();
+                if (!genderTemp.equals("m") & !genderTemp.equals("f"))
+                    throw new UserInterGenderException("Неверно указан пол", genderTemp);
+                Gender gender = Gender.valueOf(genderTemp);
                 presenter.addPerson(name, date, phone, gender);
-            } catch (Exception e) {
+            } 
+            catch (UserInterNameException e){
+                System.out.println("Слишком короткое имя - " + e.getData() + "\n");
+                continue root;
+            }
+            catch(UserInterDateException e){
+                System.out.println("Неверный формат даты - " + e.getData() + "\n");
+                continue root;
+            }
+            catch(UserInterPhoneException e){
+                System.out.println("Неверный формат номера телефона - " + e.getData() + "\n");
+                continue root;
+            }
+            catch(UserInterGenderException e){
+                System.out.println("Неверно указан пол - " + e.getData() + "\n");
+                continue root;
+            }
+            catch (Exception e) {
                 System.out.println(INPUT_ERROR);
                 continue root;
             }
