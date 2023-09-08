@@ -49,4 +49,16 @@ public class Person implements Serializable, PersonListInterface{
         if (gender != null) g = String.valueOf(this.getGender());
         return "Имя: " + n + " Дата рождения: " + d + " телефон: " + p + " пол: " + g;
     }
+
+    public String getInfo() {
+        String n = "";
+        String d = "";
+        String p = "";
+        String g = "";
+        if (name != null) n = this.getName();
+        if (date != null) d = String.valueOf(this.getDate());
+        if (phone != null) p = String.valueOf(this.getPhone());
+        if (gender != null) g = String.valueOf(this.getGender());
+        return n + " " + d + " " + p + " " + g;
+    }
 }

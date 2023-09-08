@@ -14,7 +14,7 @@ public class FileHandler implements Writable{
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath))){
             objectOutputStream.writeObject(serializable);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             System.out.println("Сохранить не удалось");
         }
     }

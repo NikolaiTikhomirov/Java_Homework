@@ -76,7 +76,6 @@ public class Console implements View{
                 }
                 if (date == null) throw new UserInterDateException("Неверный формат даты.");
                 listPersonData.remove(date.toString());
-                System.out.println(listPersonData.toString());
 
 
                 Integer phone = null;
@@ -94,7 +93,7 @@ public class Console implements View{
                     try {
                         if (element.equals("m") || element.equals("f"))
                         genderTemp = element;
-                    } catch (Exception e){}
+                    } catch (Exception e){e.printStackTrace();}
                 }
                 if (genderTemp == null) throw new UserInterGenderException("Неверно указан пол");
                 Gender gender = Gender.valueOf(genderTemp);
@@ -105,7 +104,7 @@ public class Console implements View{
                 for (String element : listPersonData) {
                     if (element.length() < 2)
                         throw new UserInterNameException("Некорректное имя персоны.", element);
-                    fio = fio + " " + element;
+                    fio += element + " ";
                 }
                 presenter.addPerson(fio, date, phone, gender);
             }
@@ -130,6 +129,7 @@ public class Console implements View{
                 continue root;
             }
             catch (Exception e) {
+                e.printStackTrace();
                 System.out.println(INPUT_ERROR);
                 continue root;
             }
