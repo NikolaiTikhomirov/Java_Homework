@@ -14,13 +14,7 @@ public class PersonList<String, T extends PersonListInterface> implements Serial
     }
 
     public void addPerson(Person person){
-        if (personList.containsKey(person.getName())){
-            // person.setQuantity(person.getQuantity() + personList.get(person.getName()).getQuantity());
-            // personList.put((String) person.getName(), person);
-        }
-        else{
-            personList.put((String) person.getName(), person);
-        }
+        personList.put((String) person.getName(), person);
     }
 
     public String getInfo(){
